@@ -6,12 +6,13 @@ int main()
     int m, n;
     cout << "Enter number of memory blocks: ";
     cin >> m;
-    int blockSize[m];
-    bool blockUsed[m] = {false};
+    int blockSize[m], originalBlockSize[m];
+
     cout << "Enter size of each block:\n";
     for (int i = 0; i < m; i++)
     {
         cin >> blockSize[i];
+        originalBlockSize[i] = blockSize[i];
     }
 
     cout << "\nEnter number of processes: ";
@@ -23,31 +24,39 @@ int main()
         cin >> processSize[i];
     }
 
-    int allocation[n];
-    int internalFrag[n];
+    int allocation[n], internalFrag[n];
     for (int i = 0; i < n; i++)
     {
         allocation[i] = -1;
         internalFrag[i] = 0;
     }
 
+    // Best Fit Allocation
     for (int i = 0; i < n; i++)
     {
+        int bestIdx = -1;
         for (int j = 0; j < m; j++)
         {
-            if (!blockUsed[j] && blockSize[j] >= processSize[i])
+            if (blockSize[j] >= processSize[i])
             {
-                allocation[i] = j;
-                internalFrag[i] = blockSize[j] - processSize[i];
-                blockSize[j] -= processSize[i];
-                blockUsed[j] = true;
-                break;
+                if (bestIdx == -1 || blockSize[j] < blockSize[bestIdx])
+                    bestIdx = j;
             }
         }
+
+        if (bestIdx != -1)
+        {
+            allocation[i] = bestIdx;
+            internalFrag[i] = blockSize[bestIdx] - processSize[i];
+            blockSize[bestIdx] -= processSize[i];
+        }
     }
-    cout << "\n\tFirst Fit Allocation";
+
+    cout << "\n\tBest Fit Allocation";
     cout << "\nProcess No\tProcess Size\tBlock No\n";
     int totalInternal = 0;
+    bool hasInternal = false, hasExternal = false;
+
     for (int i = 0; i < n; i++)
     {
         cout << i + 1 << "\t\t" << processSize[i] << "\t\t";
@@ -55,25 +64,33 @@ int main()
         {
             cout << allocation[i] + 1;
             totalInternal += internalFrag[i];
+            if (internalFrag[i] > 0)
+                hasInternal = true;
         }
         else
         {
             cout << "Not Allocated";
+            hasExternal = true;
         }
         cout << endl;
     }
 
     int totalExternal = 0;
-    for (int i = 0; i < m; i++)
+    if (hasExternal)
     {
-        if (!blockUsed[i])
+        for (int i = 0; i < m; i++)
         {
             totalExternal += blockSize[i];
         }
     }
 
-    cout << "\nTotal Internal Fragmentation: " << totalInternal << "KB" << endl;
-    cout << "Total External Fragmentation: " << totalExternal << "KB" << endl;
+    if (hasInternal)
+        cout << "\nTotal Internal Fragmentation: " << totalInternal << "KB" << endl;
+
+    if (hasExternal)
+        cout << "Total External Fragmentation: " << totalExternal << "KB" << endl;
+        else
+        cout << "No External Fragmentation" << endl;
 
     return 0;
 }

@@ -8,6 +8,7 @@ int main()
     cin >> m;
     int blockSize[m];
     bool blockUsed[m] = {false};
+
     cout << "Enter size of each block:\n";
     for (int i = 0; i < m; i++)
     {
@@ -17,6 +18,7 @@ int main()
     cout << "\nEnter number of processes: ";
     cin >> n;
     int processSize[n];
+
     cout << "Enter size of each process:\n";
     for (int i = 0; i < n; i++)
     {
@@ -33,19 +35,28 @@ int main()
 
     for (int i = 0; i < n; i++)
     {
+        int worstIndex = -1;
         for (int j = 0; j < m; j++)
         {
             if (!blockUsed[j] && blockSize[j] >= processSize[i])
             {
-                allocation[i] = j;
-                internalFrag[i] = blockSize[j] - processSize[i];
-                blockSize[j] -= processSize[i];
-                blockUsed[j] = true;
-                break;
+                if (worstIndex == -1 || blockSize[j] > blockSize[worstIndex])
+                {
+                    worstIndex = j;
+                }
             }
         }
+
+        if (worstIndex != -1)
+        {
+            allocation[i] = worstIndex;
+            internalFrag[i] = blockSize[worstIndex] - processSize[i];
+            blockSize[worstIndex] -= processSize[i];
+            blockUsed[worstIndex] = true;
+        }
     }
-    cout << "\n\tFirst Fit Allocation";
+
+    cout << "\n\tWorst Fit Allocation";
     cout << "\nProcess No\tProcess Size\tBlock No\n";
     int totalInternal = 0;
     for (int i = 0; i < n; i++)
