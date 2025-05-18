@@ -4,7 +4,6 @@ using namespace std;
 int main()
 {
     int n, frames;
-
     cout << "Enter length of reference string: ";
     cin >> n;
     int ref[n];

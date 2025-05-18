@@ -57,9 +57,7 @@ int main()
             cout << "Hit\n";
             continue;
         }
-
         m++;
-
         bool inserted = false;
         for (int j = 0; j < Fsize; j++)
         {

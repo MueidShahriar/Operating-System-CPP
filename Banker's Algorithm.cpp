@@ -4,8 +4,7 @@ using namespace std;
 int main()
 {
     int n, m = 3;
-    cout << "Enter number of processes: ";
-    cin >> n;
+    cout << "Enter number of processes: "; cin >> n;
 
     int MaxNeed[5][3], AllocatedResources[5][3], CurrentResourceNeed[5][3];
 

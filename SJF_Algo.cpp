@@ -4,8 +4,7 @@ using namespace std;
 int main()
 {
     int n;
-    cout << "Number of processes: ";
-    cin >> n;
+    cout << "Number of processes: "; cin >> n;
 
     int id[n], at[n], bt[n], ct[n], wt[n], tat[n], order[n], a[n] = {0};
 

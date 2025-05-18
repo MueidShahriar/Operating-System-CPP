@@ -4,9 +4,8 @@ int main()
 {
     int n, head, diskSize = 199;
     vector <int> requests;
-    cout << "Enter number of disk requests: ";
-    cin >> n;
-    cout << "Enter the disk requests:";
+    cout << "Enter number of disk requests: "; cin >> n;
+    cout << "Enter the disk requests: ";
     
     for (int i = 0; i < n; i++)
     {

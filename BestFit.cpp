@@ -31,7 +31,6 @@ int main()
         internalFrag[i] = 0;
     }
 
-    // Best Fit Allocation
     for (int i = 0; i < n; i++)
     {
         int bestIdx = -1;

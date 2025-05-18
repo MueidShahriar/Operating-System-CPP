@@ -3,8 +3,7 @@ using namespace std;
 
 int main() {
     int n;
-    cout<<"Enter number of track: ";
-    cin>>n;
+    cout<<"Enter number of track: "; cin>>n;
 
     int req[100];
     cout<<"Enter the track: ";
@@ -12,12 +11,10 @@ int main() {
         cin>>req[i];
     }
     int head;
-    cout<<"Enter head position: ";
-    cin>>head;
+    cout<<"Enter head position: "; cin>>head;
 
     int Size;
-    cout<<"Enter total disk size : ";
-    cin>>Size;
+    cout<<"Enter total disk size : ";  cin>>Size;
 
     string dir;
     cout<<"Towards (low/high): ";
@@ -53,7 +50,8 @@ int main() {
             seekCount += abs(head - high[i]);
             head = high[i];
         }
-    } else {
+    } 
+    else {
         for (int i = 0; i < r; i++) {
             sequence[s++] = high[i];
             seekCount += abs(head - high[i]);

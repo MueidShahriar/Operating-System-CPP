@@ -25,6 +25,7 @@ int main()
             }
         }
     }
+    
     int totalmove = 0;
     int current = headnum;
     for (int i = 0; i < n; i++)

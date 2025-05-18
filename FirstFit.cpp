@@ -74,6 +74,5 @@ int main()
 
     cout << "\nTotal Internal Fragmentation: " << totalInternal << "KB" << endl;
     cout << "Total External Fragmentation: " << totalExternal << "KB" << endl;
-
     return 0;
 }

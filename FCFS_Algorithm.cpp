@@ -1,6 +1,5 @@
 #include <bits/stdc++.h>
 using namespace std;
-
 struct Process
 {
     int id, at, bt, ct, wt, tat;
